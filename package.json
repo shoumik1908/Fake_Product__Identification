@@ -1,0 +1,17 @@
+{
+  "name": "veriscan-ai",
+  "version": "1.0.0",
+  "description": "VeriScan AI Blockchain Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "ethers": "^5.8.0",
+    "hardhat": "^2.22.3"
+  }
+}
