@@ -6,8 +6,7 @@ from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_i
 
 import os
 
-BASE_DIR = r"D:\VeriScan Ai\veriscan-backend"
-# You might want to update this later if you want to use a specific model locally. 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Default to the locally trained path from train_resnet50_model.py
 MODEL_PATH = os.path.join(BASE_DIR, "models", "veriscan_resnet50_model.h5")
 
