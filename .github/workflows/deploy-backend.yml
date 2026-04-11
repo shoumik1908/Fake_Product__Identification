@@ -21,4 +21,4 @@ jobs:
           git config --global user.email "bot@veriscan.ai"
           git config --global user.name "VeriScan Bot"
           git remote add space https://shoumik1908:$HF_TOKEN@huggingface.co/spaces/shoumik1908/veriscan-backend
-          git subtree push --prefix veriscan-backend space main
+          git push space `git subtree split --prefix veriscan-backend HEAD`:main --force
