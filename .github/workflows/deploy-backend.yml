@@ -11,14 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          lfs: true
+      - name: Install Dependencies
+        run: pip install huggingface_hub
       - name: Push to Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git config --global user.email "bot@veriscan.ai"
-          git config --global user.name "VeriScan Bot"
-          git remote add space https://shoumik1908:$HF_TOKEN@huggingface.co/spaces/shoumik1908/veriscan-backend
-          git subtree push --prefix veriscan-backend space main
+          python -c 'import os; from huggingface_hub import HfApi; api = HfApi(token=os.environ.get("HF_TOKEN")); api.upload_folder(folder_path="./veriscan-backend", repo_id="Shoumik1908/veriscan-backend", repo_type="space", ignore_patterns=["models/*.h5", ".git/*", "__pycache__/*"])'
