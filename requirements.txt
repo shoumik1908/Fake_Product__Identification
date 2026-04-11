@@ -3,6 +3,6 @@ uvicorn
 tensorflow
 numpy
 pillow
-web3
+
 python-dotenv
 python-multipart

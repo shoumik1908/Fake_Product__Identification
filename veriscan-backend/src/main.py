@@ -4,7 +4,6 @@ import shutil
 import os
 
 from src.predict import predict_image
-from src.blockchain_connect import store_ai_result
 
 app = FastAPI(title="VeriScan AI")
 
@@ -38,19 +37,17 @@ async def verify_product(
     with open(image_path, "wb") as buffer:
         shutil.copyfileobj(image.file, buffer)
 
+    from fastapi.responses import JSONResponse
     # 🔮 AI Prediction
-    label, confidence = predict_image(image_path)
-
-    is_authentic = True if label.lower() == "authentic" else False
-
-    # ⛓ Store result on blockchain
-    tx_hash = store_ai_result(product_id, is_authentic, confidence)
+    try:
+        label, confidence = predict_image(image_path)
+    except ValueError as e:
+        return JSONResponse(status_code=400, content={"detail": str(e)})
 
     return {
         "product_id": product_id,
         "prediction": label,
-        "confidence": confidence,
-        "blockchain_tx": tx_hash
+        "confidence": confidence
     }
 
 

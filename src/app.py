@@ -5,9 +5,6 @@ import os
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-
-from blockchain_connect import store_ai_result
-
 app = FastAPI()
 
 MODEL_PATH = "models/veriscan_final_model.h5"
@@ -49,20 +46,10 @@ async def predict(file: UploadFile = File(...)):
     confidence = float(np.max(prediction))
     label = class_names[np.argmax(prediction)]
 
-    tx_hash = store_ai_result(
-        product_id=file.filename,
-        ai_result=(label == "authentic"),
-        confidence=confidence
-    )
-
     return f"""
     <h3>Prediction Result</h3>
     <p><b>Result:</b> {label}</p>
     <p><b>Confidence:</b> {confidence*100:.2f}%</p>
-    <p><b>Blockchain TX:</b><br>
-    <a href="https://mumbai.polygonscan.com/tx/{tx_hash}" target="_blank">
-    {tx_hash}
-    </a></p>
     <br>
     <a href="/">Verify another product</a>
     """

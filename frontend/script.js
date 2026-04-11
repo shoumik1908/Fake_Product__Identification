@@ -18,6 +18,5 @@ document.getElementById("uploadForm").addEventListener("submit", async function(
     document.getElementById("result").innerHTML = `
         <p><b>Prediction:</b> ${data.prediction}</p>
         <p><b>Confidence:</b> ${(data.confidence * 100).toFixed(2)}%</p>
-        <p><b>Blockchain TX:</b> ${data.blockchain_tx || "Not Stored"}</p>
     `;
 });
